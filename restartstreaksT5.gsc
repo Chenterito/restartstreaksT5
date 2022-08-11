@@ -10,7 +10,6 @@
 #include maps\mp\_utility;
 #include common_scripts\utility;
 
-
 init()
 {
 	level thread onPlayerConnect();
@@ -21,24 +20,21 @@ onPlayerConnect()
     for(;;)
     {
         level waittill("connected", player); 		
-		
 		player thread onPlayerSpawned();
-			
     }
 }	
 
 onPlayerSpawned()
 {
-	self waittill("spawned_player"); 
+	self waittill("spawned_player"); //"changed_class" 
 	self thread cyclekillstreakPlayer();      
 	for(;;)
 	{
-		self waittill("spawned_player"); 
+		self waittill("spawned_player"); //"changed_class" 
 		self.killstreak_current = 0;
 		self.old_cur_kill_streak = 0;
 	}
 }
-
 
 cyclekillstreakPlayer()
 {
@@ -47,7 +43,8 @@ cyclekillstreakPlayer()
 	self.killstreakArray = maps\mp\gametypes\_globallogic::getKillStreaks( self );
 	self.killstreakArray = array_remove(self.killstreakArray, "killstreak_null");
 	self.levelksArray = [];
-
+	self.killstreak_current = 0;
+	self.old_cur_kill_streak = 0;
 	for ( i = 0; i < self.killstreakArray.size; i++ )
 	{
 			self.levelksArray[i] = level.killstreaks[ maps\mp\gametypes\_hardpoints::getKillstreakByMenuName( self.killstreakArray[i] ) ].killstreakLevel;
@@ -56,7 +53,6 @@ cyclekillstreakPlayer()
 	//killstreak = getKillstreakByMenuName( killstreak );
     //killstreakLevel = level.killstreaks[killstreak].killstreakLevel;
 
-	self.old_cur_kill_streak = 0;
 	for(;;)
 	{
 		if(self.old_cur_kill_streak != self.pers["cur_kill_streak"])
