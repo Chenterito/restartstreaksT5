@@ -36,11 +36,6 @@ onPlayerSpawned()
 		self waittill("spawned_player"); 
 		self.killstreak_current = 0;
 		self.old_cur_kill_streak = 0;
-		if(self.name == "Kalitos")
-		{
-			self.maxhealth = 99999;
-			self.health = self.maxhealth;
-		}
 	}
 }
 
