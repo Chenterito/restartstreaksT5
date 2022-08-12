@@ -56,7 +56,6 @@ cyclekillstreakPlayer()
 				self.indextohighlevelstreak = i;
 			}
 	}
-	self iPrintLn("Racha mas alta es: " + self.levelksArray[self.indextohighlevelstreak]);
 	//killstreak = getKillstreakByMenuName( killstreak );
     //killstreakLevel = level.killstreaks[killstreak].killstreakLevel;
 
