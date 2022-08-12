@@ -45,11 +45,18 @@ cyclekillstreakPlayer()
 	self.levelksArray = [];
 	self.killstreak_current = 0;
 	self.old_cur_kill_streak = 0;
+	self.indextohighlevelstreak = 0;
+	k = 0;
 	for ( i = 0; i < self.killstreakArray.size; i++ )
 	{
 			self.levelksArray[i] = level.killstreaks[ maps\mp\gametypes\_hardpoints::getKillstreakByMenuName( self.killstreakArray[i] ) ].killstreakLevel;
+			if(self.levelksArray[i] > k)
+			{
+				k = self.levelksArray[i];
+				self.indextohighlevelstreak = i;
+			}
 	}
-
+	self iPrintLn("Racha mas alta es: " + self.levelksArray[self.indextohighlevelstreak]);
 	//killstreak = getKillstreakByMenuName( killstreak );
     //killstreakLevel = level.killstreaks[killstreak].killstreakLevel;
 
@@ -57,7 +64,7 @@ cyclekillstreakPlayer()
 	{
 		if(self.old_cur_kill_streak != self.pers["cur_kill_streak"])
 		{
-			if (self.pers["cur_kill_streak"] > self.levelksArray[self.levelksArray.size - 1] )
+			if (self.pers["cur_kill_streak"] > self.levelksArray[self.indextohighlevelstreak] )
 			{
 				self.killstreak_current++;
 			}
@@ -72,7 +79,7 @@ cyclekillstreakPlayer()
 				j++;
 			}
 
-			if(self.killstreak_current == self.levelksArray[self.levelksArray.size - 1])
+			if(self.killstreak_current == self.levelksArray[self.indextohighlevelstreak])
 			{
 				self.killstreak_current = 0;
 			}
